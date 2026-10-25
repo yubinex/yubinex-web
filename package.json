@@ -8,7 +8,8 @@
         "dev": "vite",
         "build": "vite build",
         "lint": "oxlint",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "update:github": "node scripts/update-github.js"
     },
     "dependencies": {
         "react": "^19.3.1",

@@ -29,6 +29,23 @@ pnpm install
 pnpm dev
 ```
 
+## GitHub profile data
+
+Public profile data is stored in `src/data/github.json`. Refresh it manually with:
+
+```sh
+pnpm update:github
+```
+
+The Node.js script works without credentials. An optional `GITHUB_TOKEN`
+environment variable can increase API limits; never put tokens in frontend code
+or use a `VITE_` prefix for them. Only selected public profile fields are saved.
+The avatar is stored as a URL, not downloaded as an image.
+
+The snapshot is intended to be committed, so development and builds do not need
+API access. A failed API request leaves the existing snapshot unchanged. Updates
+are not automatic yet.
+
 ## Checks
 
 ```sh
