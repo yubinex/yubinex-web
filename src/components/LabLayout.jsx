@@ -1,13 +1,61 @@
 const LabLayout = ({ children }) => {
     return (
         <div className="lab-layout">
-            <header>Future Gadget Laboratory — yubinex</header>
+            <a className="skip-link" href="#archive-content">
+                Skip to active file
+            </a>
 
-            <nav>001 Profile · 002 Projects · 003 Interests</nav>
+            <header className="archive-header">
+                <div className="archive-brand">
+                    <span className="archive-mark" aria-hidden="true">
+                        Y.
+                    </span>
+                    <div>
+                        <p className="archive-eyebrow">
+                            Future Gadget Laboratory
+                        </p>
+                        <p className="archive-name">
+                            yubinex / personal archive
+                        </p>
+                    </div>
+                </div>
+                <div className="archive-worldline">
+                    <p className="archive-eyebrow">World line</p>
+                    <p className="worldline-value">1.048596</p>
+                </div>
+            </header>
 
-            <main>{children}</main>
+            <nav className="file-navigation" aria-label="Archive files">
+                <a
+                    className="file-tab"
+                    href="#archive-content"
+                    aria-current="page"
+                >
+                    <span className="file-tab-number">001</span>
+                    <span className="file-tab-name">Profile</span>
+                    <span className="file-tab-state">Open</span>
+                </a>
+                <button className="file-tab" type="button" disabled>
+                    <span className="file-tab-number">002</span>
+                    <span className="file-tab-name">Experiments</span>
+                    <span className="file-tab-state">Soon</span>
+                </button>
+                <button className="file-tab" type="button" disabled>
+                    <span className="file-tab-number">003</span>
+                    <span className="file-tab-name">Interests</span>
+                    <span className="file-tab-state">Soon</span>
+                </button>
+            </nav>
 
-            <footer>El Psy Kongroo.</footer>
+            <main id="archive-content" tabIndex={-1}>
+                {children}
+            </main>
+
+            <footer className="archive-footer">
+                <p>El Psy Kongroo.</p>
+                <span>Personal archive // End of file</span>
+                <a href="https://github.com/yubinex">GitHub ↗</a>
+            </footer>
         </div>
     );
 };

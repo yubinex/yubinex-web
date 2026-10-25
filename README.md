@@ -9,8 +9,9 @@ lab file, inspired by the amber terminals and personnel dossiers of my
 A home for my profile, projects, and interests. Navigate between individual lab
 files instead of scrolling through one long page.
 
-**Status:** early development. The shared layout is in place; file navigation,
-profile content, and the visual design are still to come.
+**Status:** the profile dossier and shared archive design are in place.
+Experiments and Interests files are planned; their navigation controls are
+marked "Soon" until those files are implemented. Deployment is not configured.
 
 ## Stack
 
@@ -61,9 +62,14 @@ configured yet.
 ## Project structure
 
 ```text
+scripts/update-github.js     Refreshes the public GitHub snapshot
 src/
-    App.jsx                  Current file content
-    components/LabLayout.jsx Shared laboratory frame
-    index.css                Global styles and layout
+    App.jsx                  Composes the layout and active file
+    components/
+        LabLayout.jsx        Shared archive header, navigation, and footer
+        FileFrame.jsx        Reusable dossier frame and file title bar
+        ProfileFile.jsx      Profile content and internal layout
+    data/github.json         Public GitHub profile snapshot
+    index.css                Shared theme, archive layout, and profile styles
     main.jsx                 React entry point
 ```

@@ -1,5 +1,7 @@
 :root {
     --color-background: #0b0a09;
+    --color-surface: #100e0c;
+    --color-titlebar: #1b1510;
     --color-text: #ffd59a;
     --color-muted: #b09b88;
     --color-accent: #ff9d4d;
@@ -16,50 +18,418 @@ body {
     color: var(--color-text);
     font-family: ui-monospace, Consolas, monospace;
     line-height: 1.6;
-}
-
-header,
-nav,
-main,
-footer {
-    border: 1px solid var(--color-border);
-    padding: 16px;
+    background-image: radial-gradient(
+        ellipse at top,
+        #25190e 0,
+        var(--color-background) 65%
+    );
 }
 
 .lab-layout {
     min-height: 100svh;
-    max-width: 960px;
+    max-width: 1040px;
     margin-inline: auto;
     display: grid;
     grid-template-rows: auto auto 1fr auto;
+    border-inline: 1px solid var(--color-border);
+    background-color: var(--color-background);
 }
 
-.profile-layout {
+.archive-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 24px 32px;
+}
+
+.archive-brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.archive-mark {
     display: grid;
-    grid-template-columns: 160px 1fr;
-    gap: 24px;
-}
-
-@media (max-width: 600px) {
-    .profile-layout {
-        grid-template-columns: 1fr;
-    }
-}
-
-.profile-identity p {
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border: 1px solid var(--color-border);
     color: var(--color-accent);
+    font-size: 1.25rem;
 }
 
-.profile-details dl {
+.archive-eyebrow {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.archive-name {
+    margin: 4px 0 0;
+    font-size: 0.875rem;
+}
+
+.archive-worldline {
+    text-align: right;
+}
+
+.worldline-value {
+    margin: 2px 0 0;
+    color: var(--color-accent);
+    font-size: 1.5rem;
+    line-height: 1.3;
+    letter-spacing: 0.12em;
+    text-shadow: 0 0 18px #ff9d4d30;
+}
+
+.file-navigation {
     display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 8px 24px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-inline: 32px;
+    border: 1px solid var(--color-border);
 }
 
-.profile-details dt {
+.file-tab {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 12px;
+    min-width: 0;
+    padding: 12px 16px;
+    border: 0;
+    background: transparent;
+    color: var(--color-muted);
+    font: inherit;
+    font-size: 0.8125rem;
+    text-decoration: none;
+    text-align: left;
+}
+
+.file-tab + .file-tab {
+    border-left: 1px solid var(--color-border);
+}
+
+.file-tab[aria-current="page"] {
+    background-color: var(--color-titlebar);
+    color: var(--color-text);
+    box-shadow: inset 0 -2px var(--color-accent);
+}
+
+.file-tab-number {
+    font-size: 0.6875rem;
     color: var(--color-muted);
 }
 
-.profile-details dd {
+.file-tab[aria-current="page"] .file-tab-number,
+.file-tab[aria-current="page"] .file-tab-state {
+    color: var(--color-accent);
+}
+
+.file-tab-state {
+    margin-left: auto;
+    font-size: 0.5625rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.file-tab:disabled {
+    cursor: not-allowed;
+}
+
+.archive-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px 24px;
+    margin-inline: 32px;
+    padding: 16px 0;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-muted);
+    font-size: 0.75rem;
+}
+
+.archive-footer p {
     margin: 0;
+    color: var(--color-accent);
+    font-style: italic;
+}
+
+.archive-footer > span {
+    font-size: 0.5625rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+a {
+    color: inherit;
+    text-underline-offset: 4px;
+}
+
+a:hover {
+    color: var(--color-accent);
+}
+
+a:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+}
+
+.skip-link {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 1;
+    padding: 8px 16px;
+    background-color: var(--color-surface);
+    transform: translateY(-200%);
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
+.lab-layout > main {
+    display: grid;
+    align-content: center;
+    min-width: 0;
+    padding: 32px;
+}
+
+.file-frame {
+    min-width: 0;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background-color: var(--color-surface);
+    /* Static texture behind the content, not an overlay over text or links. */
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0 2px,
+        rgb(255 157 77 / 2%) 2px 3px
+    );
+}
+
+.file-titlebar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 16px;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--color-border);
+    border-radius: 8px 8px 0 0;
+    background-color: var(--color-titlebar);
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.file-titlebar h1 {
+    margin: 0;
+    color: var(--color-accent);
+    font-size: inherit;
+}
+
+.file-titlebar span {
+    color: var(--color-muted);
+}
+
+/* The two direct children are the identification and observation panels. */
+.profile-body {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: 24px;
+    padding: 24px;
+}
+
+.profile-identity {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding-right: 24px;
+    border-right: 1px solid var(--color-border);
+}
+
+.profile-label,
+.profile-identity-data dt {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.6875rem;
+    font-weight: normal;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.profile-avatar {
+    display: block;
+    object-fit: cover;
+    border: 1px solid var(--color-border);
+}
+
+.profile-username {
+    margin: 4px 0 0;
+    color: var(--color-accent);
+    font-size: 1.375rem;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+}
+
+.profile-identity-data {
+    display: grid;
+    gap: 16px;
+    margin: 0;
+    font-size: 0.8125rem;
+}
+
+.profile-identity-data dd {
+    margin: 4px 0 0;
+}
+
+.profile-observation {
+    display: grid;
+    align-content: start;
+    min-width: 0;
+    gap: 20px;
+}
+
+.profile-command {
+    margin: 0;
+    color: var(--color-accent);
+    font-size: 0.75rem;
+    overflow-wrap: anywhere;
+}
+
+.profile-bio {
+    margin: 0;
+    max-width: 65ch;
+    font-size: 0.875rem;
+}
+
+.profile-details {
+    display: grid;
+    gap: 16px;
+}
+
+.profile-detail-row {
+    display: grid;
+    grid-template-columns: 88px minmax(0, 1fr);
+    align-items: baseline;
+    gap: 12px;
+}
+
+.interests-list,
+.toolkit-list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.8125rem;
+}
+
+.interests-list {
+    gap: 4px 16px;
+    color: var(--color-muted);
+}
+
+.toolkit-list {
+    gap: 6px;
+}
+
+.toolkit-list li {
+    border: 1px solid var(--color-border);
+    padding: 2px 6px;
+    font-size: 0.75rem;
+}
+
+.profile-record {
+    display: grid;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--color-border);
+}
+
+.profile-record dl {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 32px;
+    margin: 0;
+}
+
+.profile-record dt {
+    color: var(--color-muted);
+    font-size: 0.75rem;
+}
+
+.profile-record dd {
+    margin: 0;
+    color: var(--color-accent);
+    font-size: 1.125rem;
+}
+
+.profile-record a {
+    width: fit-content;
+    color: var(--color-muted);
+    font-size: 0.75rem;
+    text-underline-offset: 4px;
+}
+
+@media (max-width: 700px) {
+    .archive-header {
+        padding: 20px 16px;
+    }
+
+    .file-navigation,
+    .archive-footer {
+        margin-inline: 16px;
+    }
+
+    .file-tab {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px;
+        gap: 2px;
+        font-size: 0.75rem;
+    }
+
+    .file-tab-state {
+        margin-left: 0;
+    }
+
+    .archive-worldline {
+        text-align: left;
+    }
+
+    .lab-layout > main {
+        padding: 16px;
+    }
+
+    .profile-body {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 20px;
+    }
+
+    .profile-identity {
+        padding-right: 0;
+        padding-bottom: 20px;
+        border-right: 0;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .profile-identity-data {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px 24px;
+    }
+
+    .profile-detail-row {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
+    }
 }
