@@ -1,11 +1,17 @@
-name: CI
+name: CI and Pages
 
 on:
     push:
     pull_request:
+    workflow_dispatch:
 
 permissions:
     contents: read
+    pages: read
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: false
 
 jobs:
     check:
@@ -32,3 +38,29 @@ jobs:
 
             - name: Build
               run: pnpm build
+
+            - name: Configure Pages
+              if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+              uses: actions/configure-pages@v5
+
+            - name: Upload Pages artifact
+              if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+              uses: actions/upload-pages-artifact@v3
+              with:
+                  path: dist
+
+    deploy:
+        name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+        needs: check
+        runs-on: ubuntu-latest
+        permissions:
+            pages: write
+            id-token: write
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        steps:
+            - name: Deploy
+              id: deployment
+              uses: actions/deploy-pages@v4

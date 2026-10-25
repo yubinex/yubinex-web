@@ -11,7 +11,9 @@ files instead of scrolling through one long page.
 
 **Status:** the profile dossier and shared archive design are in place.
 Experiments and Interests files are planned; their navigation controls are
-marked "Soon" until those files are implemented. Deployment is not configured.
+marked "Soon" until those files are implemented.
+
+**Website:** https://yubinex.github.io/yubinex-web/
 
 ## Stack
 
@@ -56,8 +58,16 @@ pnpm build
 
 Use `pnpm preview` to preview the production build locally.
 
-GitHub Actions runs both checks on pushes and pull requests. Deployment is not
-configured yet.
+GitHub Actions runs both checks on pushes and pull requests. After successful
+checks on `master`, it deploys `dist/` to GitHub Pages. Pull requests and other
+branches never publish. The workflow can also be run manually on `master`.
+
+Vite's base path is `/yubinex-web/`, matching the repository's Pages URL. Use the
+local URL printed by `pnpm dev` or `pnpm preview`, including that path. If the
+repository is renamed or a custom domain is added, revisit `vite.config.js`.
+
+Deployments use the committed GitHub data snapshot; they do not refresh it
+automatically. Run `pnpm update:github` and commit the JSON to publish fresh data.
 
 ## Project structure
 
