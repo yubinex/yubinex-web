@@ -1,16 +1,28 @@
+:root {
+    --color-background: #0b0a09;
+    --color-text: #ffd59a;
+    --color-muted: #b09b88;
+    --color-accent: #ff9d4d;
+    --color-border: #3a302a;
+}
+
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: ui-monospace, Consolas, monospace;
+    line-height: 1.6;
 }
 
 header,
 nav,
 main,
 footer {
-    border: 1px solid;
+    border: 1px solid var(--color-border);
     padding: 16px;
 }
 
@@ -32,4 +44,22 @@ footer {
     .profile-layout {
         grid-template-columns: 1fr;
     }
+}
+
+.profile-identity p {
+    color: var(--color-accent);
+}
+
+.profile-details dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px 24px;
+}
+
+.profile-details dt {
+    color: var(--color-muted);
+}
+
+.profile-details dd {
+    margin: 0;
 }
