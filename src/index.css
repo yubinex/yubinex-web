@@ -5,3 +5,19 @@
 body {
     margin: 0;
 }
+
+header,
+nav,
+main,
+footer {
+    border: 1px solid;
+    padding: 16px;
+}
+
+.lab-layout {
+    min-height: 100svh;
+    max-width: 960px;
+    margin-inline: auto;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+}
