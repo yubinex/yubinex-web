@@ -1,49 +1,58 @@
+import DivergenceMeter from "./DivergenceMeter.jsx";
+import TransmissionFooter from "./TransmissionFooter.jsx";
+import styles from "./LabLayout.module.css";
+
 const LabLayout = ({ children }) => {
+    const worldline = "1.048596";
+
     return (
-        <div className="lab-layout">
-            <a className="skip-link" href="#archive-content">
+        <div className={styles["lab-layout"]}>
+            <a className={styles["skip-link"]} href="#archive-content">
                 Skip to active file
             </a>
 
-            <header className="archive-header">
-                <div className="archive-brand">
-                    <span className="archive-mark" aria-hidden="true">
+            <header className={styles["archive-header"]}>
+                <div className={styles["archive-brand"]}>
+                    <span className={styles["archive-mark"]} aria-hidden="true">
                         Y.
                     </span>
                     <div>
-                        <p className="archive-eyebrow">
+                        <p className={styles["archive-eyebrow"]}>
                             Future Gadget Laboratory
                         </p>
-                        <p className="archive-name">
+                        <p className={styles["archive-name"]}>
                             yubinex / personal archive
                         </p>
                     </div>
                 </div>
-                <div className="archive-worldline">
-                    <p className="archive-eyebrow">World line</p>
-                    <p className="worldline-value">1.048596</p>
+                <div className={styles["archive-worldline"]}>
+                    <p className={styles["archive-eyebrow"]}>World line</p>
+                    <DivergenceMeter value={worldline} />
                 </div>
             </header>
 
-            <nav className="file-navigation" aria-label="Archive files">
+            <nav
+                className={styles["file-navigation"]}
+                aria-label="Archive files"
+            >
                 <a
-                    className="file-tab"
+                    className={styles["file-tab"]}
                     href="#archive-content"
                     aria-current="page"
                 >
-                    <span className="file-tab-number">001</span>
-                    <span className="file-tab-name">Profile</span>
-                    <span className="file-tab-state">Open</span>
+                    <span className={styles["file-tab-number"]}>001</span>
+                    <span>Profile</span>
+                    <span className={styles["file-tab-state"]}>Open</span>
                 </a>
-                <button className="file-tab" type="button" disabled>
-                    <span className="file-tab-number">002</span>
-                    <span className="file-tab-name">Experiments</span>
-                    <span className="file-tab-state">Soon</span>
+                <button className={styles["file-tab"]} type="button" disabled>
+                    <span className={styles["file-tab-number"]}>002</span>
+                    <span>Experiments</span>
+                    <span className={styles["file-tab-state"]}>Soon</span>
                 </button>
-                <button className="file-tab" type="button" disabled>
-                    <span className="file-tab-number">003</span>
-                    <span className="file-tab-name">Interests</span>
-                    <span className="file-tab-state">Soon</span>
+                <button className={styles["file-tab"]} type="button" disabled>
+                    <span className={styles["file-tab-number"]}>003</span>
+                    <span>Interests</span>
+                    <span className={styles["file-tab-state"]}>Soon</span>
                 </button>
             </nav>
 
@@ -51,11 +60,7 @@ const LabLayout = ({ children }) => {
                 {children}
             </main>
 
-            <footer className="archive-footer">
-                <p>El Psy Kongroo.</p>
-                <span>Personal archive // End of file</span>
-                <a href="https://github.com/yubinex">GitHub ↗</a>
-            </footer>
+            <TransmissionFooter worldline={worldline} />
         </div>
     );
 };

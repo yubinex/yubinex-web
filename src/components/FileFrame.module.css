@@ -1,0 +1,122 @@
+.file-frame {
+    position: relative;
+    min-width: 0;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background-color: var(--color-surface);
+    /* Static texture behind the content, not an overlay over text or links. */
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0 2px,
+        rgb(255 157 77 / 2%) 2px 3px
+    );
+}
+
+/* Illuminate only the edge; never put a moving layer over the document text. */
+.file-frame::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    pointer-events: none;
+    border: 1px solid var(--color-accent);
+    border-radius: inherit;
+    opacity: 0;
+    animation: file-edge-reveal 900ms ease-out;
+}
+
+.file-frame > :not(.file-titlebar) {
+    animation: file-content-reveal 500ms ease-out 180ms both;
+}
+
+.file-titlebar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 16px;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--color-border);
+    border-radius: 8px 8px 0 0;
+    background-color: var(--color-titlebar);
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.file-titlebar h1 {
+    margin: 0;
+    color: var(--color-accent);
+    font-size: inherit;
+}
+
+.file-titlebar span {
+    color: var(--color-muted);
+}
+
+.file-title-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+}
+
+.file-titlebar .file-state {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-accent);
+}
+
+.file-state::before {
+    content: "";
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: currentColor;
+    box-shadow: 0 0 8px rgb(255 157 77 / 50%);
+    animation: file-state-breathe 5s ease-in-out infinite;
+}
+
+@keyframes file-edge-reveal {
+    0% {
+        opacity: 0.8;
+        clip-path: inset(0 100% 0 0);
+    }
+    65% {
+        opacity: 0.6;
+        clip-path: inset(0);
+    }
+    100% {
+        opacity: 0;
+        clip-path: inset(0);
+    }
+}
+
+@keyframes file-content-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes file-state-breathe {
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .file-frame::before,
+    .file-frame > :not(.file-titlebar),
+    .file-state::before {
+        animation: none;
+    }
+}

@@ -1,0 +1,157 @@
+.lab-layout {
+    min-height: 100svh;
+    max-width: 1040px;
+    margin-inline: auto;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    border-inline: 1px solid var(--color-border);
+    background-color: var(--color-background);
+}
+
+.archive-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 24px 32px;
+}
+
+.archive-brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.archive-mark {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border: 1px solid var(--color-border);
+    color: var(--color-accent);
+    font-size: 1.25rem;
+}
+
+.archive-eyebrow {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.archive-name {
+    margin: 4px 0 0;
+    font-size: 0.875rem;
+}
+
+.archive-worldline {
+    text-align: right;
+}
+
+.file-navigation {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-inline: 32px;
+    border: 1px solid var(--color-border);
+}
+
+.file-tab {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 12px;
+    min-width: 0;
+    padding: 12px 16px;
+    border: 0;
+    background: transparent;
+    color: var(--color-muted);
+    font: inherit;
+    font-size: 0.8125rem;
+    text-decoration: none;
+    text-align: left;
+}
+
+.file-tab + .file-tab {
+    border-left: 1px solid var(--color-border);
+}
+
+.file-tab[aria-current="page"] {
+    background-color: var(--color-titlebar);
+    color: var(--color-text);
+    box-shadow: inset 0 -2px var(--color-accent);
+}
+
+.file-tab-number {
+    font-size: 0.6875rem;
+    color: var(--color-muted);
+}
+
+.file-tab[aria-current="page"] .file-tab-number,
+.file-tab[aria-current="page"] .file-tab-state {
+    color: var(--color-accent);
+}
+
+.file-tab-state {
+    margin-left: auto;
+    font-size: 0.5625rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.file-tab:disabled {
+    cursor: not-allowed;
+}
+
+.skip-link {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 1;
+    padding: 8px 16px;
+    background-color: var(--color-surface);
+    transform: translateY(-200%);
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
+.lab-layout > main {
+    display: grid;
+    align-content: center;
+    min-width: 0;
+    padding: 24px 32px;
+}
+
+@media (max-width: 700px) {
+    .archive-header {
+        padding: 20px 16px;
+    }
+
+    .file-navigation {
+        margin-inline: 16px;
+    }
+
+    .file-tab {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px;
+        gap: 2px;
+        font-size: 0.75rem;
+    }
+
+    .file-tab-state {
+        margin-left: 0;
+    }
+
+    .archive-worldline {
+        text-align: left;
+    }
+
+    .lab-layout > main {
+        padding: 16px;
+    }
+}

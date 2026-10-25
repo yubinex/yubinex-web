@@ -17,7 +17,9 @@ const updateGitHub = async () => {
     });
 
     if (!response.ok) {
-        throw new Error(`GitHub profile request failed (HTTP ${response.status}).`);
+        throw new Error(
+            `GitHub profile request failed (HTTP ${response.status}).`,
+        );
     }
 
     const profile = await response.json();

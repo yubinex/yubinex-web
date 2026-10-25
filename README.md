@@ -68,8 +68,28 @@ src/
     components/
         LabLayout.jsx        Shared archive header, navigation, and footer
         FileFrame.jsx        Reusable dossier frame and file title bar
+        DivergenceMeter.jsx  Animated world-line display
+        TransmissionFooter.jsx  Transmission quote and footer
+        GlitchText.jsx       Accessible decorative text effect
+    pages/
         ProfileFile.jsx      Profile content and internal layout
     data/github.json         Public GitHub profile snapshot
-    index.css                Shared theme, archive layout, and profile styles
+    index.css                Theme, document defaults, accessibility utilities
     main.jsx                 React entry point
 ```
+
+Each component imports a matching `.module.css` file beside its `.jsx` file.
+Layout, responsive rules, animations, and reduced-motion fallbacks stay with the
+component that owns them. CSS Modules scope class names and animation names to
+prevent accidental collisions between files. Only theme variables, document
+defaults, links, and the shared `visually-hidden` utility remain global in
+`index.css`. Vite provides CSS Modules support without an extra dependency.
+CSS class names stay kebab-case, for example `.file-frame`; JSX accesses them
+with bracket notation such as `styles["file-frame"]`.
+
+Page-specific content lives in `src/pages`; reusable frames and effects live in
+`src/components`. `App.jsx` composes them, without a router yet.
+
+Personal interests and tools are edited in `src/pages/ProfileFile.jsx`; GitHub
+statistics come from the generated snapshot. Meter timings are named constants
+at the top of `DivergenceMeter.jsx`.
