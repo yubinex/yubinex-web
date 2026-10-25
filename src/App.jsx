@@ -1,10 +1,10 @@
 import LabLayout from "./components/LabLayout";
+import ProfileFile from "./components/ProfileFile";
 
 const App = () => {
     return (
         <LabLayout>
-            <h1>001 — Profile</h1>
-            <p>Lab member dossier. Profile details coming soon.</p>
+            <ProfileFile />
         </LabLayout>
     );
 };

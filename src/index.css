@@ -21,3 +21,15 @@ footer {
     display: grid;
     grid-template-rows: auto auto 1fr auto;
 }
+
+.profile-layout {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 24px;
+}
+
+@media (max-width: 600px) {
+    .profile-layout {
+        grid-template-columns: 1fr;
+    }
+}
