@@ -1,4 +1,4 @@
-function LabLayout({ children }) {
+const LabLayout = ({ children }) => {
     return (
         <div className="lab-layout">
             <header>Future Gadget Laboratory — yubinex</header>
@@ -10,6 +10,6 @@ function LabLayout({ children }) {
             <footer>El Psy Kongroo.</footer>
         </div>
     );
-}
+};
 
 export default LabLayout;
